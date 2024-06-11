@@ -4,11 +4,11 @@ import axios from 'axios'
 
 const Viewall = () => {
 const [data,changeData]=useState(
-{"products":[]}
+[]
 )
 
 const fetchData=()=>{
-    axios.get("https://dummyjson.com/products").then(
+    axios.get("http://localhost:8082/view").then(
 
         (response)=>{
             changeData(response.data)
@@ -28,13 +28,15 @@ useEffect(()=>{fetchData()},[])
 
 <div className="row g-3">
    
-{data.products.map((value,index)=>{return  <div className="col col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
+{data.map((value,index)=>{return  <div className="col col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-4">
 
 
 <div class="card">
-<img src={value.images} class="card-img-top" alt="..."/>
+<img src={value.image} class="card-img-top" alt="..."/>
 <div class="card-body">
+<p class="card-text">{value.name}</p>
 <p class="card-text">{value.id}</p>
+<p class="card-text">{value.ingr}</p>
 </div>
 </div>
 

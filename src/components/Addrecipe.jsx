@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Navbar from './Navbar'
+import axios from 'axios'
 
 const Addrecipe = () => {
 
@@ -8,7 +9,7 @@ const Addrecipe = () => {
             "name":"",
             "id":"",
             "ingr":"",
-            "meth":"",
+            "image":"",
         }
     )
     const inputHolder=(event)=>{
@@ -16,6 +17,19 @@ const Addrecipe = () => {
         }
         
         const readValue=()=>{
+
+            axios.post("http://localhost:8082/add",data).then(
+                (response)=>{
+                    console.log(response.data)
+                    if (response.data.status=="Success") {
+                        alert("successfully added")
+                        
+                    } else {
+                        alert("error")
+                        
+                    }
+                }
+            )
           console.log(data)
         }
 
@@ -47,8 +61,8 @@ const Addrecipe = () => {
     </div>
     <div className="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
 
-    <label htmlFor="" className="form-label">Method</label>
-    <textarea name="meth" id="" className="form-control" value={data.meth} onChange={inputHolder}></textarea>
+    <label htmlFor="" className="form-label">image</label>
+    <input htmlFor="" className="form-control" name="image" value={data.image} onChange={inputHolder}></input>
 
     </div>
     <div className="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
